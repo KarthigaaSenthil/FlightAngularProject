@@ -1,0 +1,39 @@
+<div class="container" style="margin-top:50px;width:40%;padding:1px;background-color:rgb(166, 219, 255);padding-top:10px;padding-bottom:10px;">
+<div class="card">
+  <div class="card-body">
+        <div class="col-md-3"></div>
+        <div class="col-md-12" style="align-items: center;">
+            <h3 style="color:#0d6efd;text-align:center;"><b>Register</b></h3>
+            <div class="col-md-12">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="name" name="name" id="name" placeholder="">
+              </div>
+                <div class="col-md-12">
+                  <label for="role" class="form-label">Role</label>
+                  <select class="form-control" [(ngModel)]="role" name="role" id="role">
+                    <option [ngValue]="undefined">Select Role</option>
+                    <option>Admin</option>
+                    <option>User</option>
+                  </select>
+                </div>
+                <div class="col-md-12">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" id="password" placeholder="">
+                </div>
+                <div class="col-md-12">
+                  <label for="emailId" class="form-label">Email Id</label>
+                  <input type="text" class="form-control" id="emailId" [(ngModel)]="emailId" name="emailId" placeholder="">
+                </div>
+                <div class="col-md-12">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber" name="phoneNumber" placeholder="">
+                  </div>
+                  <div class="col-md-12" style="text-align: center;">
+                      <button style="width: 50%;margin-top:10px;" class="btn btn-primary" type="button" (click)="saveUser()">Submit</button>
+                    </div>
+        </div>
+        <div class="col-md-3"></div>
+       
+    </div>
+    </div>
+  </div>

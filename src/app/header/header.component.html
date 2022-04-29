@@ -1,0 +1,14 @@
+<div>
+    <ul style="padding-left:10px;padding-right:10px;">
+      <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+      <li [ngClass]="(role =='Admin')?'displayBlk':'displayNone'"><a routerLink="/airline" routerLinkActive="active">Manage Airline</a></li>
+      <li [ngClass]="(role =='Admin')?'displayBlk':'displayNone'"><a routerLink="/flight" routerLinkActive="active">Manage Flights</a></li>
+      <li [ngClass]="(role =='Admin')?'displayBlk':'displayNone'"><a routerLink="/discount" routerLinkActive="active">Manage Discounts</a></li>
+      <li [ngClass]="(role =='Admin')?'displayBlk':'displayNone'"><a routerLink="/scheduling" routerLinkActive="active">Manage Schedule</a></li>
+      <li [ngClass]="(role =='User')?'displayBlk':'displayNone'"><a routerLink="/booking" routerLinkActive="active">Book Flight</a></li>
+      <li><a routerLink="/managebookings" [queryParams]="{isManageBooking: true}"  routerLinkActive="active">Manage Bookings</a></li>
+      <li><a routerLink="/bookingHistory" routerLinkActive="active">Booking History</a></li>
+      <li [ngClass]="(role =='Admin')?'displayBlk':'displayNone'"><a routerLink="/user" routerLinkActive="active">Users</a></li>
+      <li style="float: right;"><a (click)="logoutSession()" style="cursor: pointer;">Log out</a></li>
+    </ul>
+</div>

@@ -1,0 +1,198 @@
+<div>
+<app-header></app-header>
+<div class="row">
+  <h3 style="color:#0d6efd;"><b>Booking</b></h3>
+</div>
+<div class="card">
+    <div class="card-body">
+<div class="row">
+    <div class="col-md-12">
+        <input type="radio" value="OneWay" name="tripType" id="tripType" [(ngModel)]="tripType"> One Way
+        <input type="radio" value="RoundTrip" style="margin-left: 20px;" name="tripType" id="tripType" [(ngModel)]="tripType"><span style="margin-left:3px;">Round Trip</span>
+      </div>
+</div>
+<div class="row col-md-10">
+    <div class="col-md-6">
+        <div class="col-md-12 form-group" style="display: flex;">
+            Source <input type="text" class="form-control" style="margin-left: 10px;" [(ngModel)]="source" id="source" name="source" (change)="loadFlights()">
+    </div>
+        <div class="col-md-12">
+            <b>Onward Journey</b>
+            <br/>
+            <div class="col-md-12">
+              <label for="onwardDate" class="form-label">Onward Date</label>
+              <input type="datetime-local" class="form-control" id="onwardDate" [(ngModel)]="onwardDate" name="onwardDate" id="onwardDate" (change)="loadFlights()">
+            </div>
+            <ng-container *ngFor="let flight of flightData"><div class="col-md-12 divClass" id="trip_{{flight.flightID}}" (click)="clickFlight(flight.flightID,flight.airlineID, flight.scheduleID,'trip',flight.ticketCostForBusiness, flight.ticketCostForNonBusiness)"><span class="badge1 tripp bg-secondary1"><strong style="font-size:16px;color:white">{{flight.flightNumber}} </strong><br><strong>  Business Cost: Rs.{{flight.ticketCostForBusiness}},</strong><strong>  Non Business Cost: Rs.{{flight.ticketCostForNonBusiness}}</strong></span></div></ng-container>
+        </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-12 form-group" style="display: flex;">
+                    Destination<input type="text" class="form-control" [(ngModel)]="destination" id="destination" name="destination" style="margin-left:10px;" (change)="loadFlights()">
+                </div>
+                <div class="col-md-12" [style.display]="tripType=='RoundTrip'?'block':'none'">
+                    <b>Return Journey</b>
+                    <br/>
+                    <div class="col-md-12">
+                      <label for="returnDate" class="form-label">Return Date</label>
+                      <input type="datetime-local" class="form-control" id="returnDate" [(ngModel)]="returnDate" name="returnDate" id="returnDate" (change)="loadReturnFlights()">
+                    </div>
+                    <ng-container *ngFor="let flight of returnFlights"><div class="col-md-12 divClass" id="return_{{flight.flightID}}" (click)="clickFlight(flight.flightID,flight.airlineID, flight.scheduleID,'return',flight.ticketCostForBusiness, flight.ticketCostForNonBusiness)"><span class="badge1 returnn bg-secondary1">{{flight.flightNumber}}<br><strong>  Business Cost: Rs.{{flight.ticketCostForBusiness}},</strong><strong>  Non Business Cost: Rs.{{flight.ticketCostForNonBusiness}}</strong></span></div></ng-container>
+                </div>
+            </div>
+</div>
+<div class="row col-md-12" [style.display]="displayPassenger">
+  <div class="row col-md-5" style="margin:0px;padding-left:0px;">
+    <div style="display: flex;">
+      <h5>Add Passenger</h5> 
+      <button type="button" class="btn btn-primary btn-sm" (click)="addPassenger()" style="margin-left: 10px;">Add</button>
+    </div>
+     <div class="col-md-6">
+      <div class="col-md-12">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" [(ngModel)]="name" name="name" id="name">
+      </div>
+      <div class="col-md-12">
+        <label for="age" class="form-label">Age</label>
+        <input type="number" class="form-control" [(ngModel)]="age" name="age" id="age" placeholder="">
+      </div>
+      <div class="col-md-12">
+        <label for="mealPreference" class="form-label">Meal Preference</label>
+        <select class="form-control" [(ngModel)]="mealPreference" name="mealPreference" id="mealPreference">
+          <option [ngValue]="undefined">Select Meal Preference</option>
+          <option>Veg</option>
+          <option>Non-veg</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label for="onwardSeatNumber" class="form-label">Onward Seat Number</label>
+        <select class="form-control" [(ngModel)]="onwardSeatNumber" name="onwardSeatNumber" id="onwardSeatNumber">
+          <option [ngValue]="undefined">Select Onward Seat</option>
+          <option [value]="item" *ngFor="let item of onwardSeats">{{ item }}</option>
+        </select>
+      </div>
+     
+     </div>
+     <div class="col-md-6">
+      <div class="col-md-12">
+        <label for="gender" class="form-label">Gender</label>
+        <select class="form-control" [(ngModel)]="gender" name="gender" id="gender">
+          <option [ngValue]="undefined">Select Gender</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Others</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label for="emailId" class="form-label">Email Id</label>
+        <input type="text" class="form-control" [(ngModel)]="emailId" name="emailId" id="emailId" placeholder="">
+      </div>
+     
+      <div class="col-md-12">
+        <label for="seatType" class="form-label">Seat Type</label>
+        <select class="form-control" [(ngModel)]="seatType" name="seatType" id="seatType" (click)="loadSeatss()">
+          <option [ngValue]="undefined">Select Seat Type</option>
+          <option>Business</option>
+          <option>Non-Business</option>
+        </select>
+      </div>
+      <div class="col-md-12" [style.display]="tripType=='RoundTrip'?'block':'none'">
+        <label for="returnSeatNumber" class="form-label">Return Seat Number</label>
+        <select class="form-control" [(ngModel)]="returnSeatNumber" name="returnSeatNumber" id="returnSeatNumber">
+          <option [ngValue]="undefined">Select Return Seat</option>
+          <option [value]="item" *ngFor="let item of returnSeats">{{ item }}</option>
+        </select>
+      </div>
+     </div>
+  </div>
+  <div class="col-md-7">
+    <h5>Passenger Details</h5>
+        <table class="table table-striped table-hover">
+          <thead>
+             <tr>
+               <th>
+                 Name
+               </th>
+               <th>
+                Onward Seat
+               </th>
+               <th [style.display]="tripType=='RoundTrip'?'block':'none'">
+                Return Seat
+              </th>
+               <th>
+                Seat Type
+              </th>
+               <th>
+                Onward Price
+               </th>
+               <th [style.display]="tripType=='RoundTrip'?'block':'none'">
+               Return Price
+              </th>
+               <th>
+                 Option
+               </th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let item of passengerList; let i=index">
+               <td>
+                {{item.name}}
+               </td>
+               <td>{{item.onwardSeatNumber}}</td>
+               <td [style.display]="tripType=='RoundTrip'?'block':'none'">{{item.returnSeatNumber}}</td>
+               <td hidden>{{item.gender}}</td>
+               <td hidden>{{item.emailId}}</td>
+               <td hidden>{{item.mealPreference}}</td>
+               <td hidden>{{item.age}}</td>
+               <td> {{ item.seatType }} </td>
+               <td>
+                 {{item.tripPrice}}
+               </td>
+               <td [style.display]="tripType=='RoundTrip'?'block':'none'">
+                {{item.returnPrice}}
+              </td>
+              <td style="text-align: center;"><i class="fa fa-trash" title="Delete" (click)="delete(item,i)" style="color:red;"></i></td>
+             </tr>
+           </tbody>
+         </table>
+  </div>
+</div>
+<div class="row col-md-12">
+  <div class="col-md-6" [style.display]="displayDiscount">
+    <h5>Add Discount</h5>
+    <div style="display: flex;">
+    <div class="col-md-6">
+      <!-- <label for="discountID" class="form-label">Discount Code</label> -->
+      <select class="form-control" [(ngModel)]="discountID" name="discountID" id="discountID">
+        <option [ngValue]="undefined" selected>Select Discount</option>
+        <option [value]="discount.discountID" *ngFor="let discount of discountData">{{discount.discountCode}}</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <button type="button" style="margin-left:5px;" class="btn btn-primary" (click)="addDiscount(this.discountID)">Apply Discount</button>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-6" [style.display]="displayPriceTag">
+    <div class="col-md-4">
+      <ul class="price">
+        <li class="header">One Way</li>
+        <li class="header">Round Trip</li>
+        <li class="header">Discount Price</li>
+        <li class="header">Price (after discount)</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <ul class="price">
+        <li class="grey" id="oneWayPrice">$0</li>
+        <li class="grey" id="roundTripPrice">$0</li>
+        <li class="grey" id="discAmt"></li>
+        <li class="grey" id="priceAftrDisc"></li>
+      </ul>
+  </div>
+</div>
+</div>
+<div class="col-md-12" style="text-align: center"><button type="button" class="btn btn-success" (click)="continueBooking()">Continue Booking</button></div>
+</div>
+</div>
+</div>

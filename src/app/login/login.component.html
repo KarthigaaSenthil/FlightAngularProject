@@ -1,0 +1,29 @@
+<div class="mainContainer">
+<div class="container" style="margin-top:50px;width:40%;padding:1px;background-color:lightblue;padding-top:20px;padding-bottom:20px;">
+  <div class="card">
+    <div class="card-body">
+  <div class="col-md-12" style="padding:20px;">
+  <div class="mb-3">
+    <label for="EmailAddress" class="form-label">Email address</label>
+    <div style="display: flex;">
+    <div class="input-group-text"><i class="fa fa-envelope" style="color:grey;"></i></div>
+    <input type="email" placeholder="Email Address" class="form-control" id="EmailAddress" [(ngModel)]="EmailAddress" name="EmailAddress">
+  </div>
+</div>
+  <div class="mb-3">
+    <label for="Password" class="form-label">Password</label>
+    <div style="display: flex;">
+      <div class="input-group-text"><i class="fa fa-key" style="color:grey;"></i></div>
+    <input type="password" placeholder="Password" class="form-control" id="Password" [(ngModel)]="Password" name="Password">
+  </div>
+</div>
+  <div style="text-align: center">
+    <button style="width:50%;" type="button" (click)="onLoginClick()" class="btn btn-primary">Log in</button>
+  </div>
+  <div style="text-align: center;margin-left: 35%;">
+    <span style="display: flex;">Not a user? <a routerLink="/register" style="margin-left:5px;"><b>Register</b></a></span></div>
+</div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+textarea{
+    resize: none;
+}
+.card, .row{
+    margin: 30px;
+}
+.modal-body{
+    padding:0px;
+}
+.modal-header,.modal-footer{
+    padding: 0.5rem;
+}
+.modalRow{
+    margin:10px;
+}
+.fa{
+    color:royalblue;
+}
+.centerClass{
+    text-align: center;
+}
+.modal-title{
+    line-height: 1.2;
+}
+thead{
+    background-color: #9fd9ff;
+}
+.card, .row{
+    margin-top:10px;
+    margin-bottom:10px;
+}
